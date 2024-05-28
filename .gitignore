@@ -1,3 +1,7 @@
+### Project files ###
+config.properties
+
+### Default ###
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
