@@ -1,7 +1,11 @@
 package org.example;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Title implements Comparable<Title> {
+  @SerializedName("Title")
   private String name;
+  @SerializedName("Year")
   private int year;
   private boolean includedInPlan;
   private double review;

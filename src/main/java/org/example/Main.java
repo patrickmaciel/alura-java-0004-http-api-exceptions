@@ -1,5 +1,6 @@
 package org.example;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -22,8 +23,12 @@ public class Main {
 
     try {
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      String json = response.body();
+      System.out.println(json);
 
-      System.out.println(response.body());
+      Gson gson = new Gson();
+      Title myTitle = gson.fromJson(json, Title.class);
+      System.out.println(myTitle);
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }

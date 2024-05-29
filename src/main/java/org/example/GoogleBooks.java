@@ -1,5 +1,6 @@
 package org.example;
 
+import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -30,6 +31,10 @@ public class GoogleBooks {
           .uri(URI.create(urlAddress))
           .build();
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      String json = response.body();
+
+      Gson gson = new Gson();
+      gson.fromJson(json, Object.class);
 
       System.out.println(response.body());
     } catch (IOException | InterruptedException e) {
