@@ -1,23 +1,27 @@
 package org.example;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Enter the movie title: (try Matrix for example)");
     String movieTitle = scanner.nextLine();
 
-    String apiKey = "43e78112";
+    Properties properties = new Properties();
+    properties.load(new FileInputStream("config.properties"));
+    String apiKey = properties.getProperty("omdbKey");
+
     String apiUrl = "http://www.omdbapi.com/?apikey=" + apiKey + "&t=" + movieTitle;
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
