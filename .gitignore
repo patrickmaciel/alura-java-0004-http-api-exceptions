@@ -1,6 +1,7 @@
 ### Project files ###
 config.properties
 title.txt
+person.json
 
 ### Default ###
 target/
