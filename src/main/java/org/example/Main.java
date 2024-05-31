@@ -1,6 +1,8 @@
 package org.example;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -26,9 +28,25 @@ public class Main {
       String json = response.body();
       System.out.println(json);
 
+      System.out.println("Using title + annotations");
       Gson gson = new Gson();
       Title myTitle = gson.fromJson(json, Title.class);
       System.out.println(myTitle);
+
+      System.out.println("");
+      System.out.println("---------------------------------");
+      System.out.println("");
+
+      System.out.println("Using Record (java 17)");
+      Gson gsonWithBuilder = new GsonBuilder()
+          .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+      TitleOmdb titleRecord = gsonWithBuilder.fromJson(json, TitleOmdb.class);
+      System.out.println(titleRecord);
+
+      System.out.println("");
+      System.out.println("Converting TitleOmdb to Title");
+      Title newTitle = new Title(titleRecord);
+      System.out.println(newTitle);
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
