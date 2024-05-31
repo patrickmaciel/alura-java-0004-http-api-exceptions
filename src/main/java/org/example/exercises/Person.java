@@ -6,14 +6,20 @@ public class Person {
   @SerializedName("nome")
   private String name;
   @SerializedName("idade")
-  private String age;
+  private int age;
   @SerializedName("cidade")
   private String city;
 
-  public Person(String name, String age, String city) {
+  public Person(String name, int age, String city) {
     this.name = name;
     this.age = age;
     this.city = city;
+  }
+
+  public Person(PersonJson personJson) {
+    this.name = personJson.nome();
+    this.age = Integer.parseInt(personJson.idade());
+    this.city = personJson.cidade();
   }
 
   public String getName() {
@@ -24,11 +30,11 @@ public class Person {
     this.name = name;
   }
 
-  public String getAge() {
+  public int getAge() {
     return age;
   }
 
-  public void setAge(String age) {
+  public void setAge(int age) {
     this.age = age;
   }
 
