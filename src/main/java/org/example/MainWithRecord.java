@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -40,6 +41,11 @@ public class MainWithRecord {
 
       Title newTitle = new Title(titleRecord);
       System.out.println(newTitle);
+
+      // Save the title to a file
+      FileWriter file = new FileWriter("title.txt");
+      file.write(newTitle.toString());
+      file.close();
     } catch (IOException | InterruptedException e) {
       System.out.println("IO / Interrupted: " + e.getMessage());
     } catch (NumberFormatException e) {
@@ -50,6 +56,8 @@ public class MainWithRecord {
       System.out.println("IllegalArgumentException: " + e.getMessage());
     } catch (TitleYearConversionException e) {
       System.out.println("TitleYearConversionException: " + e.getMessage());
+    } catch (Exception e) {
+      System.out.println("Exception: " + e.getMessage());
     } finally {
       System.out.println("Finalizing the program");
     }
