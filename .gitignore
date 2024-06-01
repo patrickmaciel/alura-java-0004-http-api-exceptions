@@ -2,6 +2,7 @@
 config.properties
 title.txt
 person.json
+address.txt
 
 ### Default ###
 target/
